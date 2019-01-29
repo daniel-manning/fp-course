@@ -41,8 +41,7 @@ instance Functor ExactlyOne where
     (a -> b)
     -> ExactlyOne a
     -> ExactlyOne b
-  (<$>) =
-    error "todo: Course.Functor (<$>)#instance ExactlyOne"
+  (<$>) f a = ExactlyOne (f $ runExactlyOne a)
 
 -- | Maps a function on the List functor.
 --
@@ -56,8 +55,7 @@ instance Functor List where
     (a -> b)
     -> List a
     -> List b
-  (<$>) =
-    error "todo: Course.Functor (<$>)#instance List"
+  (<$>) f la = error "todo:"
 
 -- | Maps a function on the Optional functor.
 --
