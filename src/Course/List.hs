@@ -130,8 +130,7 @@ map ::
   (a -> b)
   -> List a
   -> List b
-map f Nil = Nil
-map f (a :. b) = (f a) :. map f b
+map f = foldRight (\a b -> (f a) :. b) Nil
 
 -- | Return elements satisfying the given predicate.
 --
@@ -147,8 +146,7 @@ filter ::
   (a -> Bool)
   -> List a
   -> List a
-filter f Nil = Nil
-filter f (a :. b) = if (f a) then a :. (filter f b) else filter f b
+filter f = foldRight (\a b -> if (f a) then a :. b else b) Nil
 
 -- | Append two lists to a new list.
 --
