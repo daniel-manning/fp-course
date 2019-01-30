@@ -75,8 +75,7 @@ headOr ::
   a
   -> List a
   -> a
-headOr a Nil = a
-headOr _ (a :. _) = a
+headOr a = foldRight const a
 
 -- | The product of the elements of a list.
 --
@@ -255,9 +254,7 @@ find ::
   (a -> Bool)
   -> List a
   -> Optional a
-
-find _ Nil = Empty
-find p (h :. t) = if (p h) then (Full h) else find p t
+find p = foldRight (\a b -> if (p a) then (Full a) else b) Empty
 
 -- | Determine if the length of the given list is greater than 4.
 --
