@@ -118,7 +118,7 @@ instance Applicative ((->) t) where
   pure ::
     a
     -> ((->) t a)
-  pure a =  (\_ -> a)
+  pure =  const
 
   (<*>) ::
     ((->) t (a -> b))
