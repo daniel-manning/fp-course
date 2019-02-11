@@ -102,8 +102,6 @@ getFile ::
 getFile fp = ((,) fp) <$> readFile fp
 
 
---readFile :: FilePath -> IO Chars
-
 -- Given a list of file names, return list of (file name and file contents).
 -- Use @getFile@.
 getFiles ::
@@ -116,14 +114,14 @@ getFiles lfp =  sequence $ getFile <$> lfp
 run ::
   FilePath
   -> IO ()
-run =
-  error "todo: Course.FileIO#run"
+run fp =  printFiles =<< getFiles =<< pure (\a -> lines $ snd a) <*> getFile fp
 
 -- /Tip:/ use @getArgs@ and @run@
 main ::
   IO ()
-main =
-  error "todo: Course.FileIO#main"
+main = (foldRight (\b c -> run b) (pure ())) =<< getArgs
+
+--getArgs :: IO (List Chars)
 
 ----
 
