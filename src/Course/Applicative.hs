@@ -314,8 +314,9 @@ sequence ::
   Applicative k =>
   List (k a)
   -> k (List a)
-sequence = foldRight (lift2 (:.)) (pure Nil)
-
+--sequence = foldRight (lift2 (:.)) (pure Nil)
+sequence =
+  error "todo: Course.Applicative#sequence"
 -- | Replicate an effect a given number of times.
 --
 -- /Tip:/ Use `Course.List#replicate`.
@@ -366,7 +367,6 @@ filtering ::
   (a -> k Bool)
   -> List a
   -> k (List a)
-  -> f (List a)
 filtering p la = sequence $ map (\a -> a <$ (p a)) la
 
 -----------------------

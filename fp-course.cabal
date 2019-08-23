@@ -1,0 +1,131 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 2f1881e1e9bc280e7843a426ba43ef7f5cabb958156fea92ee1754f427962c1b
+
+name:           fp-course
+version:        0.1.0.0
+synopsis:       Source code for a functional programming course
+description:    Source code for a course in functional programming using Haskell
+category:       Education
+homepage:       https://github.com/data61/fp-course
+bug-reports:    https://github.com/data61/fp-course/issues
+author:         Tony Morris <tmorris@tmorris.net> Mark Hibberd <mthibberd@gmail.com> Ben Sinclair <ben.d.sinclair@gmail.com> James Earl Douglas <james@earldouglas.com> Eric Torreborre <etorreborre@yahoo.com>
+maintainer:     Tony Morris
+copyright:      Copyright (C) 2010-2013 Tony Morris Copyright (C) 2012-2015 National ICT Australia Limited Copyright (C) 2012      James Earl Douglas Copyright (C) 2012      Ben Sinclair Copyright (C) 2016-2017 Data61
+license:        BSD3
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/daniel-manning/fp-course
+
+library
+  exposed-modules:
+      Course
+      Course.Alternative
+      Course.Anagrams
+      Course.Applicative
+      Course.Cheque
+      Course.Comonad
+      Course.Compose
+      Course.Contravariant
+      Course.Core
+      Course.ExactlyOne
+      Course.Extend
+      Course.FastAnagrams
+      Course.FileIO
+      Course.Functor
+      Course.Interactive
+      Course.JsonParser
+      Course.JsonValue
+      Course.List
+      Course.ListZipper
+      Course.Monad
+      Course.MoreParser
+      Course.Optional
+      Course.Parser
+      Course.Person
+      Course.State
+      Course.StateT
+      Course.Traversable
+      Course.Validation
+  other-modules:
+      Paths_fp_course
+  hs-source-dirs:
+      src
+  default-extensions: NoImplicitPrelude ScopedTypeVariables InstanceSigs
+  ghc-options: -Wall -fwarn-incomplete-uni-patterns -fno-warn-unused-binds -fno-warn-unused-do-bind -fno-warn-unused-imports -fno-warn-type-defaults -ferror-spans
+  build-depends:
+      HUnit >=1.6.0.0
+    , QuickCheck >=2.12.6.1
+    , StateVar >=1.1.1.1
+    , aeson >=1.4.2.0
+    , ansi-terminal >=0.9
+    , ansi-wl-pprint >=0.6.8.2
+    , array >=0.4
+    , async >=2.2.1
+    , attoparsec >=0.13.2.2
+    , base >=4.7 && <5
+    , base-compat >=0.10.5
+    , call-stack >=0.1.0
+    , clock >=0.7.2
+    , cmdargs >=0.10.20
+    , colour >=2.3.4
+    , conduit >=1.3.1
+    , containers >=0.4
+    , contravariant >=1.5
+    , cpphs >=1.20.8
+    , data-default >=0.7.1.1
+    , data-default-class >=0.1.2.0
+    , data-default-instances-containers >=0.0.1
+    , data-default-instances-dlist >=0.0.1
+    , data-default-instances-old-locale >=0.0.1
+    , dlist >=0.8.0.5
+    , erf >=2.0.0.0
+    , exceptions >=0.10.0
+    , extra >=1.6.14
+    , happy >=1.19.9
+    , hashable >=1.2.7.0
+    , haskell-src-exts >=1.21.0
+    , haskell-src-exts-util >=0.2.4
+    , hscolour >=1.24.4
+    , integer-logarithms >=1.0.2.2
+    , libyaml >=0.1.0.0
+    , mono-traversable >=1.0.10.0
+    , old-locale >=1.0.0.7
+    , old-time >=1.1.0.3
+    , optparse-applicative >=0.14.3.0
+    , polyparse >=1.12.1
+    , primitive >=0.6.4.0
+    , random >=1.1
+    , refact >=0.3.0.2
+    , resourcet >=1.2.2
+    , scientific >=0.3.6.2
+    , semigroups >=0.18.5
+    , split >=0.2.3.3
+    , syb >=0.7
+    , tagged >=0.8.6
+    , tasty >=1.2
+    , tasty-hunit >=0.10.0.1
+    , tasty-quickcheck >=0.10
+    , tf-random >=0.5
+    , th-abstraction >=0.2.10.0
+    , time-locale-compat >=0.1.1.5
+    , transformers-compat >=0.6.2
+    , unbounded-delays >=0.1.1.0
+    , uniplate >=1.6.12
+    , unliftio-core >=0.1.2.0
+    , unordered-containers >=0.2.10.0
+    , uuid-types >=1.0.3
+    , vector >=0.12.0.2
+    , vector-algorithms >=0.8.0.1
+    , wcwidth >=0.0.2
+    , yaml >=0.11.0.0
+  default-language: Haskell2010
