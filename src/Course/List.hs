@@ -232,7 +232,7 @@ flattenAgain = flatMap (\a -> a)
 seqOptional ::
   List (Optional a)
   -> Optional (List a)
-seqOptional = foldRight (\a b -> twiceOptional (:.) a b) Empty 
+seqOptional = foldRight (\a b -> twiceOptional (:.) a b) (Full Nil) 
 
 -- | Find the first element in the list matching the predicate.
 --
@@ -289,7 +289,7 @@ lengthGT4 _ = False
 reverse ::
   List a
   -> List a
-reverse = foldRight (\a b -> a :. b) Nil
+reverse = foldLeft (\a b -> b :. a) Nil
 
 -- | Produce an infinite `List` that seeds with the given value at its head,
 -- then runs the given function for subsequent elements
