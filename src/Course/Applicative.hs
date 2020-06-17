@@ -292,7 +292,7 @@ lift1 ab fa = pure ab <*> fa
   k b
   -> k a
   -> k b
-(<*) fb fa = lift2 (\_ b -> b) fa fb
+(<*) fb fa = lift2 (\a _ -> a) fb fa
 
 -- | Sequences a list of structures to a structure of list.
 --
@@ -314,9 +314,7 @@ sequence ::
   Applicative k =>
   List (k a)
   -> k (List a)
---sequence = foldRight (lift2 (:.)) (pure Nil)
-sequence =
-  error "todo: Course.Applicative#sequence"
+sequence = foldRight (lift2 (:.)) (pure Nil)
 -- | Replicate an effect a given number of times.
 --
 -- /Tip:/ Use `Course.List#replicate`.
@@ -335,12 +333,13 @@ sequence =
 --
 -- >>> replicateA 3 ('a' :. 'b' :. 'c' :. Nil)
 -- ["aaa","aab","aac","aba","abb","abc","aca","acb","acc","baa","bab","bac","bba","bbb","bbc","bca","bcb","bcc","caa","cab","cac","cba","cbb","cbc","cca","ccb","ccc"]
+
 replicateA ::
   Applicative k =>
   Int
   -> k a
   -> k (List a)
-replicateA n fa = pure (replicate n) <*> fa
+replicateA n fa =  sequence $ (replicate n) fa
 
 -- | Filter a list with a predicate that produces an effect.
 --
@@ -367,7 +366,7 @@ filtering ::
   (a -> k Bool)
   -> List a
   -> k (List a)
-filtering p la = sequence $ map (\a -> a <$ (p a)) la
+filtering p la = foldRight (\a -> lift2 (\b -> if b then (a :.) else id) (p a) ) (pure Nil) la
 
 -----------------------
 -- SUPPORT LIBRARIES --
