@@ -146,7 +146,7 @@ join ffa =  id =<< ffa
 infixl 1 >>=
 
 -- | Implement composition within the @Monad@ environment.
--- Pronounced, kleisli composition.
+-- Pronounced, Kleisli composition.
 --
 -- >>> ((\n -> n :. n :. Nil) <=< (\n -> n+1 :. n+2 :. Nil)) 1
 -- [2,2,3,3]
