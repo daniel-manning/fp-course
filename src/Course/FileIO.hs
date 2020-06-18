@@ -85,14 +85,17 @@ printFile ::
   FilePath
   -> Chars
   -> IO ()
-printFile fp c =  foldRight (\a _ -> putStrLn a) (pure ()) (("============ " ++ fp) :. c :. Nil)
+printFile fp c =  do
+  putStrLn ("============ " ++ fp)
+  putStrLn c
 
 -- Given a list of (file name and file contents), print each.
 -- Use @printFile@.
 printFiles ::
   List (FilePath, Chars)
   -> IO ()
-printFiles = foldRight (\a _ -> printFile (fst a) (snd a)) (pure ())
+printFiles xs =
+  void(sequence((\t -> printFile (fst t) (snd t)) <$> xs))
 
 -- Given a file name, return (file name and file contents).
 -- Use @readFile@.
@@ -114,12 +117,18 @@ getFiles lfp =  sequence $ getFile <$> lfp
 run ::
   FilePath
   -> IO ()
-run fp =  printFiles =<< getFiles =<< pure (\a -> lines $ snd a) <*> getFile fp
+run fp =  do
+  content <- readFile fp
+  result <- getFiles (lines content)
+  printFiles result
 
 -- /Tip:/ use @getArgs@ and @run@
 main ::
   IO ()
-main = (foldRight (\b c -> run b) (pure ())) =<< getArgs
+main = getArgs >>= \xxs -> 
+  case xxs of
+    Nil -> putStrLn "No Arguments"
+    x :. _ -> run x
 
 --getArgs :: IO (List Chars)
 
