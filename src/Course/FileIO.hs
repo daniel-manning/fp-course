@@ -95,14 +95,14 @@ printFiles ::
   List (FilePath, Chars)
   -> IO ()
 printFiles xs =
-  void(sequence((\t -> printFile (fst t) (snd t)) <$> xs))
+  void(sequence(uncurry printFile <$> xs))
 
 -- Given a file name, return (file name and file contents).
 -- Use @readFile@.
 getFile ::
   FilePath
   -> IO (FilePath, Chars)
-getFile fp = ((,) fp) <$> readFile fp
+getFile fp = (,) fp <$> readFile fp
 
 
 -- Given a list of file names, return list of (file name and file contents).
