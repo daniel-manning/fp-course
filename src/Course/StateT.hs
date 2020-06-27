@@ -236,8 +236,9 @@ instance Functor k => Functor (OptionalT k) where
     (a -> b)
     -> OptionalT k a
     -> OptionalT k b
-  (<$>) =
-    error "todo: Course.StateT (<$>)#instance (OptionalT k)"
+  (<$>) ab oka = OptionalT( 
+      (ab <$>) <$> runOptionalT oka
+    )
 
 -- | Implement the `Applicative` instance for `OptionalT k` given a Monad k.
 --
@@ -267,15 +268,26 @@ instance Monad k => Applicative (OptionalT k) where
   pure ::
     a
     -> OptionalT k a
-  pure =
-    error "todo: Course.StateT pure#instance (OptionalT k)"
+  pure a =
+    OptionalT( pure (Full a))
 
   (<*>) ::
     OptionalT k (a -> b)
     -> OptionalT k a
     -> OptionalT k b
-  (<*>) =
-    error "todo: Course.StateT (<*>)#instance (OptionalT k)"
+--  OptionalT f <*> OptionalT a =
+--    OptionalT (f >>= optional (\f' -> (f' <$>) <$> a) (pure Empty))
+  
+  (<*>) okab oka =
+    OptionalT(
+       let kab = runOptionalT okab
+           ka = runOptionalT oka
+
+           --t:: Monad k => (a -> b) -> k (Optional b)
+           t f' = (f' <$>) <$> ka
+
+      in kab >>= optional t (pure Empty)
+    )
 
 -- | Implement the `Monad` instance for `OptionalT k` given a Monad k.
 --
